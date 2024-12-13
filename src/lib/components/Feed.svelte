@@ -16,13 +16,12 @@
     </div>
     <div class="articleList">
         {#each articleList as article}
-            <div class="articleCard">
-                <div class="imgPlaceholder"></div>
-                <div class="textBox">
-                    <h3>{article.title}</h3>
+            <a href="/auth">
+                <div class="articleCard">
+                    <h3>{article.title}<iconify-icon icon="tabler:leaf"></iconify-icon></h3>
                     <p>{article.description.substring(0, 100) + " ..."}</p>
                 </div>
-            </div>
+            </a>
         {/each}
     </div>
 </section>
@@ -70,6 +69,9 @@
         border-radius: 10px;
         background: var(--green-500, #0E9F6E);
     }
+    button:hover {
+        background: var(--green-200, #BCF0DA);
+    }
     .articleList {
         display: flex;
         padding-top: 15px;
@@ -87,22 +89,24 @@
         align-items: flex-start;
 
         border-radius: var(--rounded-3xl, 24px);
-        background: #FFF;   
+        background: #FFF;
+        overflow: hidden;
     }
-    .imgPlaceholder {
-        flex: 1 0 0;
-        align-self: stretch;
-        background: url("/articleImg.jpg") lightgray 50% / cover no-repeat, #D9D9D9;
+    .articleCard:hover {
+        box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.10), 0px 4px 6px 0px rgba(0, 0, 0, 0.05);
     }
-    .textBox {
-        display: flex;
-        padding: 0px 10px 10px 10px;
-        flex-direction: column;
-        align-items: flex-start;
-        align-self: stretch;
+    .articleCard:not(:hover) iconify-icon {
+        display: none;
     }
     h3 {
+        flex: 3 0 0;
         align-self: stretch;
+        background: url("articleImg.jpg") darkgreen 70%;
+        padding: 0px 10px 10px 10px;
+        display: flex;
+        justify-content: flex-start; /* Aligns horizontally to the left */
+        align-items: flex-end;
+        position: relative;
 
         color: var(--green-500, #0E9F6E);
 
@@ -113,8 +117,18 @@
         font-weight: 700;
         line-height: 150%; /* 24px */
     }
+    iconify-icon {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+    iconify-icon:hover {
+        background-color: #0E9F6E;
+    }
     p {
+        flex: 2;
         align-self: stretch;
+        padding: 0px 10px 10px 10px;
 
         color: var(--black, #000);
 
@@ -124,5 +138,8 @@
         font-style: normal;
         font-weight: 500;
         line-height: 150%; /* 18px */
+    }
+    a {
+        text-decoration: none;
     }
 </style>
