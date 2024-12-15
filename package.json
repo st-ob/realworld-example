@@ -30,6 +30,7 @@
 	},
 	"dependencies": {
 		"@sveltejs/adapter-vercel": "^5.5.0",
+		"@types/crypto-js": "^4.2.2",
 		"iconify": "^1.4.0",
 		"iconify-icon": "^2.2.0"
 	}

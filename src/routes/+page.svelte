@@ -1,89 +1,95 @@
-<main>
-    <section class="action">
-        <p>Welcome to the Conduit - the blog for sustainable energy</p>
-        <a href="/auth?type=signin">Sign In</a>
-        <a href="/auth?type=signup">Sign Up</a>
-    </section>
-    <section>
-        <img src="/backImg.png" alt="Conduit Article Garden" /> 
-    </section>
-</main>
+<div class="home-page">
+    <div class="banner">
+        <div class="container">
+            <h1 class="logo-font">conduit</h1>
+            <p>A place to share your knowledge.</p>
+        </div>
+    </div>
+  
+    <div class="container page">
+      <div class="row">
+        <div class="col-md-9">
+            <div class="feed-toggle">
+                <ul class="nav nav-pills outline-active">
+                <li class="nav-item">
+                    <a class="nav-link" href="">Your Feed</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="">Global Feed</a>
+                </li>
+                </ul>
+            </div>
 
-<style>
-    main {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        align-content: center;
-        gap: 30px;
-        flex-shrink: 0;
-        align-self: stretch;
-        flex-wrap: wrap;
-    }
-
-    .action {
-        display: flex;
-        min-width: 300px;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 20px;
-    }
-
-    p {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        flex: 1 0 0;
-        align-self: stretch;
-
-        color: #000;
-        text-align: center;
-        /* text-2xl/font-bold */
-        font-family: Inter;
-        font-size: 24px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 150%; /* 36px */
-        letter-spacing: -0.24px;
-    }
-
-    a {
-        display: flex;
-        padding: var(--15, 6px) var(--35, 14px);
-        justify-content: center;
-        align-items: center;
-
-        border-radius: var(--rounded-xl, 12px);
-        background: var(--green-600, #057A55);
-
-        color: var(--green-200, #BCF0DA);
-        text-align: center;
-
-        /* text-2xl/font-bold */
-        font-family: Inter;
-        font-size: 24px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 150%; /* 36px */
-        letter-spacing: -0.24px;
-        text-decoration: none;
-    }
-
-    a:hover {
-        color: white;
-    }
-
-    img {
-        display: flex;
-        min-width: 300px;
-        max-width: 600px;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        flex: 1 0 0;
-    }
-</style>
-
-
+            <div class="article-preview">
+                <div class="article-meta">
+                    <a href="/profile/eric-simons"><img src="http://i.imgur.com/Qr71crq.jpg" alt="Eric Simons" /></a>
+                    <div class="info">
+                        <a href="/profile/eric-simons" class="author">Eric Simons</a>
+                        <span class="date">January 20th</span>
+                    </div>
+                    <button class="btn btn-outline-primary btn-sm pull-xs-right">
+                        <i class="ion-heart"></i> 29
+                    </button>
+                </div>
+                <a href="/article/how-to-build-webapps-that-scale" class="preview-link">
+                <h1>How to build webapps that scale</h1>
+                <p>This is the description for the post.</p>
+                <span>Read more...</span>
+                <ul class="tag-list">
+                    <li class="tag-default tag-pill tag-outline">realworld</li>
+                    <li class="tag-default tag-pill tag-outline">implementations</li>
+                </ul>
+                </a>
+            </div>
+  
+            <div class="article-preview">
+                <div class="article-meta">
+                <a href="/profile/albert-pai"><img src="http://i.imgur.com/N4VcUeJ.jpg" /></a>
+                <div class="info">
+                    <a href="/profile/albert-pai" class="author">Albert Pai</a>
+                    <span class="date">January 20th</span>
+                </div>
+                <button class="btn btn-outline-primary btn-sm pull-xs-right">
+                    <i class="ion-heart"></i> 32
+                </button>
+                </div>
+                <a href="/article/the-song-you" class="preview-link">
+                <h1>The song you won't ever stop singing. No matter how hard you try.</h1>
+                <p>This is the description for the post.</p>
+                <span>Read more...</span>
+                <ul class="tag-list">
+                    <li class="tag-default tag-pill tag-outline">realworld</li>
+                    <li class="tag-default tag-pill tag-outline">implementations</li>
+                </ul>
+                </a>
+            </div>
+  
+            <ul class="pagination">
+                <li class="page-item active">
+                    <a class="page-link" href="">1</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="">2</a>
+                </li>
+            </ul>
+        </div>
+  
+        <div class="col-md-3">
+            <div class="sidebar">
+                <p>Popular Tags</p>
+    
+                <div class="tag-list">
+                    <a href="" class="tag-pill tag-default">programming</a>
+                    <a href="" class="tag-pill tag-default">javascript</a>
+                    <a href="" class="tag-pill tag-default">emberjs</a>
+                    <a href="" class="tag-pill tag-default">angularjs</a>
+                    <a href="" class="tag-pill tag-default">react</a>
+                    <a href="" class="tag-pill tag-default">mean</a>
+                    <a href="" class="tag-pill tag-default">node</a>
+                    <a href="" class="tag-pill tag-default">rails</a>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
