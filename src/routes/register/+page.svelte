@@ -1,3 +1,10 @@
+<script lang="ts">
+    import { enhance } from "$app/forms";
+	import type { ActionData } from "./$types";
+
+    let {form} : {form: ActionData} = $props();
+</script>
+
 <div class="auth-page">
     <div class="container page">
         <div class="row">
@@ -6,20 +13,22 @@
                 <p class="text-xs-center">
                     <a href="/login">Have an account?</a>
                 </p>
-        
+
+                {#if form}
                 <ul class="error-messages">
-                    <li>That email is already taken</li>
+                    <li>{form.message}</li>
                 </ul>
+                {/if}
         
-                <form>
+                <form method="POST" use:enhance>
                     <fieldset class="form-group">
-                        <input class="form-control form-control-lg" type="text" placeholder="Username" />
+                        <input class="form-control form-control-lg" type="text" name="username" placeholder="Username" />
                     </fieldset>
                     <fieldset class="form-group">
-                        <input class="form-control form-control-lg" type="text" placeholder="Email" />
+                        <input class="form-control form-control-lg" type="email" name="email" placeholder="Email" />
                     </fieldset>
                     <fieldset class="form-group">
-                        <input class="form-control form-control-lg" type="password" placeholder="Password" />
+                        <input class="form-control form-control-lg" type="password" name="password" placeholder="Password" />
                     </fieldset>
                     <button class="btn btn-lg btn-primary pull-xs-right">Sign up</button>
                 </form>

@@ -44,7 +44,7 @@
   
             <div class="article-preview">
                 <div class="article-meta">
-                <a href="/profile/albert-pai"><img src="http://i.imgur.com/N4VcUeJ.jpg" /></a>
+                <a href="/profile/albert-pai"><img alt="Eric Simons" src="http://i.imgur.com/N4VcUeJ.jpg" /></a>
                 <div class="info">
                     <a href="/profile/albert-pai" class="author">Albert Pai</a>
                     <span class="date">January 20th</span>
