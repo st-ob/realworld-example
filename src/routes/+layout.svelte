@@ -1,9 +1,9 @@
 <script lang="ts">
     import { page } from '$app/stores';
     import type { Snippet } from 'svelte';
+	import type { PageData } from './$types';
 
-    let { children }: { children: Snippet } = $props();
-    let loggedIn = $state(false);
+    let { children, data }: { children: Snippet, data: PageData } = $props();
 </script>
 
 <svelte:head>
@@ -32,7 +32,7 @@
             <li class="nav-item">
                 <a class="nav-link" class:active="{$page.url.pathname === "/"}" href="/">Home</a>
             </li>
-            {#if loggedIn}
+            {#if data.user}
             <li class="nav-item">
                 <a class="nav-link" class:active="{$page.url.pathname.includes("/editor")}" href="/editor"> <i class="ion-compose"></i>&nbsp;New Article </a>
             </li>

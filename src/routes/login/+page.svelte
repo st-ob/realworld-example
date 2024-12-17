@@ -1,8 +1,8 @@
 <script lang="ts">
     import { enhance } from "$app/forms";
-	import type { ActionData } from "./$types";
+	import type { ActionData, PageData } from "./$types";
 
-    let { form } : { form: ActionData} = $props()
+    let { form, data } : { form: ActionData, data: PageData } = $props()
 </script>
 
 <div class="auth-page">
@@ -17,6 +17,11 @@
                 {#if form}
                 <ul class="error-messages">
                     <li>{form.message}</li>
+                </ul>    
+                {/if}
+                {#if data.redirectMessage}
+                <ul class="error-messages">
+                    <li>Page requires login</li>
                 </ul>    
                 {/if}
 

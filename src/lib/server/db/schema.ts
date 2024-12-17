@@ -1,7 +1,7 @@
 import { pgTable, uniqueIndex, serial, text, timestamp, integer, unique, index, date } from "drizzle-orm/pg-core"
-import { sql } from "drizzle-orm"
+import { sql, type InferSelectModel } from "drizzle-orm"
 
-export const article = pgTable("Article", {
+export const articleTable = pgTable("Article", {
 	id: serial("id").primaryKey().notNull(),
 	slug: text("slug").notNull(),
 	title: text("title").notNull(),
@@ -18,7 +18,7 @@ export const article = pgTable("Article", {
 	}
 });
 
-export const comment = pgTable("Comment", {
+export const commentTable = pgTable("Comment", {
 	id: serial("id").primaryKey().notNull(),
 	createdAt: timestamp("createdAt", { mode: 'string' }).defaultNow().notNull(),
 	updatedAt: timestamp("updatedAt", { mode: 'string' }).defaultNow().notNull(),
@@ -32,7 +32,7 @@ export const comment = pgTable("Comment", {
 	}
 });
 
-export const session = pgTable("Session", {
+export const sessionTable = pgTable("Session", {
 	id: text("id").primaryKey().notNull(),
 	userId: integer("userId").notNull(),
 	expiresAt: date("expires_at", {mode: "date"}).notNull()
@@ -43,7 +43,7 @@ export const session = pgTable("Session", {
 	}
 });
 
-export const tag = pgTable("Tag", {
+export const tagTable = pgTable("Tag", {
 	id: serial("id").primaryKey().notNull(),
 	name: text("name").notNull(),
 },
@@ -54,7 +54,7 @@ export const tag = pgTable("Tag", {
 	}
 });
 
-export const user = pgTable("User", {
+export const userTable = pgTable("User", {
 	id: serial("id").primaryKey().notNull(),
 	email: text("email").notNull(),
 	username: text("username").notNull(),
@@ -104,3 +104,9 @@ export const _userFollows = pgTable("_UserFollows", {
 		bIdx: index("_UserFollows_B_index").on(table.followed),
 	}
 });
+
+export type Article = InferSelectModel<typeof articleTable>
+export type Comment = InferSelectModel<typeof commentTable>
+export type Session = InferSelectModel<typeof sessionTable>
+export type User = InferSelectModel<typeof userTable>
+export type Tag = InferSelectModel<typeof tagTable>

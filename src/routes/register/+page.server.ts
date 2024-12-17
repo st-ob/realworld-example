@@ -1,14 +1,24 @@
 import { fail, redirect } from '@sveltejs/kit';
-import { checkEmailAvailability, createUser } from '$lib/server/db';
-import type { Actions } from './$types';
+import { checkEmailAvailability, createUser } from '$lib/server/credentials';
+import type { Actions, PageServerLoad } from './$types';
+import { createSession, generateSessionToken, setSessionTokenCookie } from '$lib/server/session';
+
+export const load: PageServerLoad = async ({locals}) => {
+    // if user is already logged in, redirect to homepage
+    if(locals.user) {
+        throw redirect(302, "/");
+    }   
+};
 
 export const actions = {
-	default: async ({request}) => {
-		const data = await request.formData();
+	default: async (event) => {
+        // extract inpurt data from form
+		const data = await event.request.formData();
         const username = data.get('username');
         const email = data.get('email');
         const password = data.get('password');
 
+        // validate input data
         if (typeof email !== "string" || typeof username !== "string" || typeof password !== "string") {
             return fail(400, {
                 message: "Invalid or missing fields",
@@ -51,8 +61,12 @@ export const actions = {
                 username
             });
         }
-        const user = await createUser(email, username, password);
 
+        // create user and session, and set session token cookie
+        const user = await createUser(email, username, password);
+        const token = generateSessionToken();
+        const session = await createSession(token, user.id);
+        setSessionTokenCookie(event, token, session.expiresAt);
 
         return redirect(302, '/');
 	}
