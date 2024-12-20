@@ -22,3 +22,27 @@ export function redirectToProtectedPath(event: RequestEvent) {
 
 	return event;
 }
+
+// create url name for the user profile
+export function createUrlPath(username: string) {
+	return username
+        .trim()                         	// Remove any leading/trailing whitespace
+        .toLowerCase()                  	// Convert to lowercase for consistency
+        .replace(/\s+/g, '-')            	// Replace spaces with hyphens
+        .replace(/[^\w\-]/g, '')         	// Remove any non-word characters (except hyphens and underscores)
+        .replace(/--+/g, '-')            	// Replace multiple consecutive hyphens with a single hyphen
+        .replace(/^-+/, '')              	// Remove hyphen from the start
+        .replace(/-+$/, '');             	// Remove hyphen from the end
+}
+
+// create slug url from article titles
+export function createArticleSlug(title: string) {
+	return title
+		.slice(0, 20)						// Cut after 15 characters
+		.toLowerCase()                  	// Convert to lowercase for consistency
+		.replace(/\s+/g, '-')            	// Replace spaces with hyphens
+        .replace(/[^\w\-]/g, '')         	// Remove any non-word characters (except hyphens and underscores)
+        .replace(/--+/g, '-')            	// Replace multiple consecutive hyphens with a single hyphen
+        .replace(/^-+/, '')              	// Remove hyphen from the start
+        .replace(/-+$/, '');             	// Remove hyphen from the end
+}

@@ -1,29 +1,40 @@
+<script lang="ts">
+	import type { PageData } from "./$types";
+
+    let {data} : {data: PageData} = $props();
+    let article = $derived(data.article);
+    let author = $derived(data.author!);
+    let isAuthor = $derived(author.id === data.user?.id);
+</script>
+
 <div class="article-page">
     <div class="banner">
         <div class="container">
-            <h1>How to build webapps that scale</h1>
+            <h1>{article.title}</h1>
     
             <div class="article-meta">
-                <a href="/profile/eric-simons"><img src="http://i.imgur.com/Qr71crq.jpg" alt="Eric Simons" /></a>
+                <a href="/profile/{author.profilePath}"><img src={author.image} alt={author.username} /></a>
                 <div class="info">
-                    <a href="/profile/eric-simons" class="author">Eric Simons</a>
-                    <span class="date">January 20th</span>
+                    <a href="/profile/{author.profilePath}" class="author">{author.username}</a>
+                    <span class="date">{article.updatedAt}</span>
                 </div>
                 <button class="btn btn-sm btn-outline-secondary">
                     <i class="ion-plus-round"></i>
-                    &nbsp; Follow Eric Simons <span class="counter">(10)</span>
+                    &nbsp; Follow {author.username} <span class="counter">(10)</span>
                 </button>
                 &nbsp;&nbsp;
                 <button class="btn btn-sm btn-outline-primary">
                     <i class="ion-heart"></i>
                     &nbsp; Favorite Post <span class="counter">(29)</span>
                 </button>
-                <button class="btn btn-sm btn-outline-secondary">
+                {#if isAuthor}
+                <a class="btn btn-sm btn-outline-secondary" href="/editor?articleId={article.id}" >
                     <i class="ion-edit"></i> Edit Article
-                </button>
+                </a>
                 <button class="btn btn-sm btn-outline-danger">
                     <i class="ion-trash-a"></i> Delete Article
                 </button>
+                {/if}
             </div>
         </div>
     </div>

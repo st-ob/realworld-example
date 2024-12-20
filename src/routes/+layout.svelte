@@ -1,9 +1,10 @@
 <script lang="ts">
-    import { page } from '$app/stores';
+    import { page } from '$app/state';
     import type { Snippet } from 'svelte';
 	import type { PageData } from './$types';
 
     let { children, data }: { children: Snippet, data: PageData } = $props();
+    let pathname = $derived(page.url.pathname);
 </script>
 
 <svelte:head>
@@ -30,27 +31,27 @@
         <a class="navbar-brand" href="/">conduit</a>
         <ul class="nav navbar-nav pull-xs-right">
             <li class="nav-item">
-                <a class="nav-link" class:active="{$page.url.pathname === "/"}" href="/">Home</a>
+                <a class="nav-link" class:active="{pathname === "/"}" href="/">Home</a>
             </li>
             {#if data.user}
             <li class="nav-item">
-                <a class="nav-link" class:active="{$page.url.pathname.includes("/editor")}" href="/editor"> <i class="ion-compose"></i>&nbsp;New Article </a>
+                <a class="nav-link" class:active="{pathname.includes("/editor")}" href="/editor"> <i class="ion-compose"></i>&nbsp;New Article </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" class:active="{$page.url.pathname.includes("/settings")}" href="/settings"> <i class="ion-gear-a"></i>&nbsp;Settings </a>
+                <a class="nav-link" class:active="{pathname.includes("/settings")}" href="/settings"> <i class="ion-gear-a"></i>&nbsp;Settings </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" class:active="{$page.url.pathname.includes("/profile")}" href="/profile/eric-simons">
-                    <img src="http://i.imgur.com/Qr71crq.jpg" alt="Eric Simons" class="user-pic" />
-                    Eric Simons
+                <a class="nav-link" class:active="{pathname.includes("/profile")}" href="/profile/{data.user.profilePath}">
+                    <img src={data.user.image} alt={data.user.username} class="user-pic" />
+                    {data.user.username}
                 </a>
             </li>
             {:else}
             <li class="nav-item">
-                <a class="nav-link" class:active="{$page.url.pathname.includes("/login")}" href="/login">Sign in</a>
+                <a class="nav-link" class:active="{pathname.includes("/login")}" href="/login">Sign in</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" class:active="{$page.url.pathname.includes("/register")}" href="/register">Sign up</a>
+                <a class="nav-link" class:active="{pathname.includes("/register")}" href="/register">Sign up</a>
             </li>
             {/if} 
         </ul>

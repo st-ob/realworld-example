@@ -3,6 +3,7 @@ import { count, eq } from 'drizzle-orm';
 
 import { db } from './db';
 import { userTable } from './db/schema';
+import { createUrlPath } from '$lib/utils';
 
 const hashSettings = {cost: 131072, blockSize: 8, parallelization: 1, maxmem: 140000000}; //based on OWASP recommendations
 const hashLength = 64;
@@ -34,6 +35,7 @@ export async function createUser(email: string, username: string, password: stri
     const users = await db.insert(userTable).values({
         email: email,
         username: username,
+        profilePath: createUrlPath(username),
         passwordHash: hashPassword(password)
     }).returning();
 
