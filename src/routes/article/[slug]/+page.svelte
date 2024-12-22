@@ -43,13 +43,14 @@
         <div class="row article-content">
             <div class="col-md-12">
                 <p>
-                    Web development technologies have evolved at an incredible clip over the past few years.
+                    {article.description}
                 </p>
                 <h2 id="introducing-ionic">Introducing RealWorld.</h2>
                 <p>It's a great solution for learning how other frameworks work.</p>
                 <ul class="tag-list">
-                    <li class="tag-default tag-pill tag-outline">realworld</li>
-                    <li class="tag-default tag-pill tag-outline">implementations</li>
+                    {#each data.tags!.map(({name}) => name) as tag}
+                    <li class="tag-default tag-pill tag-outline">{tag}</li>    
+                    {/each}
                 </ul>
             </div>
         </div>

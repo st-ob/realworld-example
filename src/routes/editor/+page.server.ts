@@ -1,7 +1,7 @@
 import { eq } from 'drizzle-orm';
 import type { Actions, PageServerLoad } from './$types';
 import { db } from '$lib/server/db';
-import { articleTable, type InsertArticle } from '$lib/server/db/schema';
+import { _articleToTag, articleTable, tagTable, type InsertArticle } from '$lib/server/db/schema';
 import { createArticleSlug } from '$lib/utils';
 import { fail, redirect } from '@sveltejs/kit';
 
@@ -9,12 +9,19 @@ export const load: PageServerLoad = async ({url}) => {
     const articleId = Number(url.searchParams.get("articleId")) ?? null;
     console.log(articleId);
     let article = null;
+    let tags = null;
     if(articleId) {
         article = (await db.select().from(articleTable).where(eq(articleTable.id, articleId)))[0];
+        tags = await db
+            .select({name: tagTable.name, id: tagTable.id})
+            .from(tagTable)
+            .innerJoin(_articleToTag, eq(_articleToTag.tag, tagTable.id))
+            .where(eq(_articleToTag.article, articleId));
     }
 
     return {
-        article
+        article,
+        tags
     }
 };
 
@@ -24,6 +31,7 @@ export const actions: Actions = {
         const data = await request.formData();
         const title = data.get('title') as string;
         const slug = createArticleSlug(title)
+        const tagList = data.get('tagList');
 
         const article: InsertArticle = {
             title,

@@ -3,7 +3,7 @@ import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from "@oslojs/enco
 import { eq } from "drizzle-orm";
 
 import { db } from "./db";
-import { sessionTable, userTable, type Session, type User } from "./db/schema";
+import { sessionTable, userTable, type SelectSession, type SelectUser} from "./db/schema";
 import type { RequestEvent } from "@sveltejs/kit";
 
 // create session token with (at least) 20 random bytes, encode as base32 for case-insensitivity, alphanumeric and more compact than hex
@@ -84,5 +84,5 @@ export function deleteSessionTokenCookie(event: RequestEvent) {
 }
 
 export type SessionValidationResult =
-	| { session: Session; user: User }
+	| { session: SelectSession; user: SelectUser }
 	| { session: null; user: null };
